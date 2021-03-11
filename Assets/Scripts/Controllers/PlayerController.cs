@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public float forwardSpeed = 5f;
     private float currentSpeed;
     private bool dealDamagePause;
-
+    private bool pauseBreakeMade;
     public GameObject shot;
     public Transform shotSpawn;
 
@@ -52,7 +52,11 @@ public class PlayerController : MonoBehaviour
         {
             forwardSpeed = 0f;
 
-            StartCoroutine(PauseBreak());
+            if (!pauseBreakeMade)
+            {
+                pauseBreakeMade = true;
+                StartCoroutine(PauseBreak());
+            }
         }
 
         if (swipeLeft)
@@ -152,6 +156,8 @@ public class PlayerController : MonoBehaviour
         }
 
         dealDamagePause = false;
+        pauseBreakeMade = false;
         forwardSpeed = currentSpeed;
+
     }
 }
